@@ -2,13 +2,13 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "start": "node dist/server.js",
-    "watch": "nodemon dist/server.js",
-    "seed": "node dist/seeds/seed.js"
+    "start": "vite",
+    "watch": "nodemon dist/server.js"
+    
   },
   "author": "",
   "license": "ISC",

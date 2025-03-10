@@ -8,7 +8,7 @@ import User from '../models/Team';
 
 const SavedTeams = () => {
   const [userData, setUserData] = useState(new User (
-    '','','',[]))};
+    '','','',[]));
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
