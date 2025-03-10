@@ -2,7 +2,7 @@
   "name": "sportsAPI",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
     "start:dev": "concurrently \"cd server && npm run watch\" \"wait-on tcp:3001 && cd client && npm run dev\"",
@@ -18,9 +18,14 @@
   "author": "david",
   "license": "ISC",
   "dependencies": {
+    "@balldontlie/sdk": "^1.2.2",
+    "bootstrap": "^5.3.3",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "eslint": "^8.56.0",
+    "express": "^4.21.2",
+    "jwt-decode": "^4.0.0",
+    "react-bootstrap": "^2.10.9"
   },
   "devDependencies": {
     "rollup": "^4.35.0",

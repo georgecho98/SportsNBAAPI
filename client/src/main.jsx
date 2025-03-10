@@ -4,8 +4,10 @@ import './index.css'
 
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import SearchSport from './pages/SearchSport.jsx';
+import SavedScoreResult from './pages/SavedScoreResult.jsx';
 
-import App from './App';
+import App from './App.jsx';
 
 import NotFound from './pages/NotFound';
 

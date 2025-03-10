@@ -10,22 +10,20 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveTeam,searchSport } from '../utils/API';
+import { saveTeam,searchTeam } from '../utils/API';
 import { saveTeamNames, getSavedTeamNames } from '../utils/localStorage';
-// import type { Book } from '../models/Book';
-// import type { GoogleAPIBook } from '../models/GoogleAPIBook';
+
 
 const SearchSport = () => {
-  // create state for holding returned google api data
+
   const [searchedTeams, setSearchedTeams] = useState('');
-  // create state for holding our search field data
+
   const [searchInput, setSearchInput] = useState('');
 
-  // create state to hold saved bookId values
+
   const [savedTeamNames, setSavedTeamNames] = useState(getSavedTeamNames());
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+
   useEffect(() => {
     return () => saveTeamNames(savedTeamNames);
   });
@@ -39,7 +37,7 @@ const SearchSport = () => {
     }
 
     try {
-      const response = await searchSport(searchInput);
+      const response = await searchTeam(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -65,7 +63,7 @@ const SearchSport = () => {
     }
   };
 
-  // create function to handle saving a book to our database
+  // create function to handle saving a team to our database
   const handleSaveTeam = async (full_name) => {
     
     const teamToSave = searchedTeams.find(() => team.full_name === full_name);
@@ -95,7 +93,7 @@ const SearchSport = () => {
     <>
       <div className="text-light bg-dark p-5">
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search for Teams!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
@@ -105,7 +103,7 @@ const SearchSport = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='Search for a Team'
                 />
               </Col>
               <Col xs={12} md={4}>

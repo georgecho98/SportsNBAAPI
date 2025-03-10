@@ -4,9 +4,9 @@ import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { getMe, deleteTeam } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeTeamName } from '../utils/localStorage';
-import User from '../models/Team';
+import {User} from '../models/Team';
 
-const SavedTeams = () => {
+const SavedScoreResult = () => {
   const [userData, setUserData] = useState(new User (
     '','','',[]));
 
@@ -47,7 +47,7 @@ const SavedTeams = () => {
     }
 
     try {
-      const response = await deleteTeam(full_name, token);
+      const response = await deleteTeam(full_name);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -55,7 +55,7 @@ const SavedTeams = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
+      // upon success, remove team name from localStorage
       removeTeamName(full_name);
     } catch (err) {
       console.error(err);
@@ -122,4 +122,4 @@ const SavedTeams = () => {
   );
 };
 
-export default SavedTeams;
+export default SavedScoreResult;

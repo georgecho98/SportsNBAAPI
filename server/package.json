@@ -2,24 +2,32 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "start": "vite",
-    "watch": "nodemon dist/server.js"
-    
+    "start": "npm run build && node dist/server.js",
+    "dev": "nodemon dist/server.js"
+      },
+  "nodemonConfig": {
+    "watch": ["src"],
+    "ext": "ts,json,js",
+    "exec": "npx tsc && node dist/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/server": "^4.10.4",
-    "express": "^4.19.2",
-    "graphql": "^16.9.0",
+        
+    "lru-cache": "^11.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.0",
+    "rimraf": "^6.0.1",
+    "express": "^4.21.2",
+    
     "mongoose": "^8.4.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4",
-    "typescript": "^5.5.2"
+    "nodemon": "^3.1.4"
   }
 }

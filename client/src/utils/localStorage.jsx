@@ -6,7 +6,7 @@ export const getSavedTeamNames = () => {
   return savedTeamNames;
 };
 
-export const savedTeamNames= (teamNameArr) => {
+export const saveTeamNames= (teamNameArr) => {
   if (teamNameArr.length) {
     localStorage.setItem('saved_books', JSON.stringify(teamNameArr));
   } else {
