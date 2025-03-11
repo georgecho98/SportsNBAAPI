@@ -99,8 +99,9 @@ const SavedScoreResult = () => {
                     />
                   ) : null}
                   <Card.Body>
-                        <Card.Title>{team.name}</Card.Title>
+                        <Card.Title>{team.full_name}</Card.Title>
                         <p className='small'>conference: {team.conference}</p>
+                        <p className='small'>name: {team.name}</p>
                         <p className='small'>city {team.city}</p>
                         <p className='small'>division: {team.division}</p>
                         <p className='small'>Abbreviation: {team.abbreviation}</p>

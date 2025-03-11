@@ -1,6 +1,6 @@
 export const getSavedTeamNames = () => {
-  const savedTeamNames = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+  const savedTeamNames = localStorage.getItem('saved_teams')
+    ? JSON.parse(localStorage.getItem('saved_teams'))
     : [];
 
   return savedTeamNames;
@@ -8,15 +8,15 @@ export const getSavedTeamNames = () => {
 
 export const saveTeamNames= (teamNameArr) => {
   if (teamNameArr.length) {
-    localStorage.setItem('saved_books', JSON.stringify(teamNameArr));
+    localStorage.setItem('saved_teams', JSON.stringify(teamNameArr));
   } else {
-    localStorage.removeItem('saved_books');
+    localStorage.removeItem('saved_teams');
   }
 };
 
 export const removeTeamName = (name) => {
-  const savedTeamNames = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+  const savedTeamNames = localStorage.getItem('saved_teams')
+    ? JSON.parse(localStorage.getItem('saved_teams'))
     : null;
 
   if (!savedTeamNames) {
@@ -24,7 +24,7 @@ export const removeTeamName = (name) => {
   }
 
   const updatedSavedTeamNames = savedTeamNames?.filter((savedTeamName) => savedTeamName !== name);
-  localStorage.setItem('saved_books', JSON.stringify(updatedSavedTeamNames));
+  localStorage.setItem('saved_teams', JSON.stringify(updatedSavedTeamNames));
 
   return true;
 };

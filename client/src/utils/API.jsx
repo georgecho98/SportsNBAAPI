@@ -42,9 +42,12 @@ try{
 
   console.log('Response',response);
   const teams = response.data;
+
+  
   
  const team = teams.find(team => team.name.toLowerCase() === query.toLowerCase());
 
+ console.log('Response',team);
   if (team){
 
   return team

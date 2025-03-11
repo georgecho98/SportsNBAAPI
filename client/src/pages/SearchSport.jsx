@@ -16,10 +16,9 @@ import { saveTeamNames, getSavedTeamNames } from '../utils/localStorage';
 
 const SearchSport = () => {
 
-  const [searchedTeams, setSearchedTeams] = useState([]);
+  const [searchedTeams, setSearchedTeams] = useState('');
 
   const [searchInput, setSearchInput] = useState('');
-
 
   const [savedTeamNames, setSavedTeamNames] = useState(getSavedTeamNames());
 
@@ -38,25 +37,30 @@ const SearchSport = () => {
 
     try {
       const response = await searchTeam(searchInput);
+      console.log(response)
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
+      // if (!response.ok) {
+      //   throw new Error(`something went wrong!:${response.status}`);
+      // }
+
+      // const { items } = await response.json();
+   
+      if (!response) {
+        console.error('No items found in the response');
+        return;
       }
+      // .map((team) => ({
+      //   id: team.id,
+      //   conference: team.conference ,
+      //   division: team.division,
+      //   city: team.city,
+      //   name: team.name || ['No team to display'],
+      //   full_name: team.full_name || '',
+      //   abbreviation: team.abbreviation || '',
 
-      const { items } = await response.json();
-
-      const teamData = items.map((team) => ({
-        id: team.id,
-        conference: team.conference ,
-        division: team.division,
-        city: team.city,
-        name: team.name || ['No team to display'],
-        full_name: team.full_name || '',
-        abbreviation: team.abbreviation || '',
-
-      }));
-
-      setSearchedTeams(teamData);
+      // }));
+      // console.log('Response JSON:', teamData);
+      setSearchedTeams(response);
       setSearchInput('');
     } catch (err) {
       console.error(err);
@@ -120,29 +124,31 @@ const SearchSport = () => {
         <h2 className='pt-5'>
           {searchedTeams.length
             ? `Viewing ${searchedTeams.length} results:`
-            : 'Search for a book to begin'}
+            : 'Search for a team to begin'}
         </h2>
         <Row>
-          {searchedTeams.map((team) => {
-            return (
-              <Col md="4" key={team.name}>
+          {/* {searchedTeams.localeCompare((team)=>{ */}
+            {/* return ( */}
+              <Col md="4" key={searchedTeams.name}>
                 <Card border='dark'>
-                  {team ? (
-                    <Card.Img src={"..\..\Image\x01.jpg"} alt={`Not available`} variant='top' />
+                  {searchedTeams ? (
+                    <Card.Img src={"/Image/x01.jpg"} alt={`Not available`} variant='top' />
                   ) : null}
                   <Card.Body>
-                    <Card.Title>{team.name}</Card.Title>
-                    <p className='small'>conference: {team.conference}</p>
-                    <p className='small'>city {team.city}</p>
-                    <p className='small'>division: {team.division}</p>
-                    <p className='small'>Abbreviation: {team.abbreviation}</p>
+                    <Card.Title>{searchedTeams.full_name}</Card.Title>
+                    <p className='small'>id: {searchedTeams.id}</p>
+                    <p className='small'>conference: {searchedTeams.conference}</p>
+                    <p className='small'>city {searchedTeams.city}</p>
+                    <p className='small'>division: {searchedTeams.division}</p>
+                    <p className='small'>name: {searchedTeams.name}</p>
+                    <p className='small'>Abbreviation: {searchedTeams.abbreviation}</p>
 
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedTeamNames?.some((savedTeamName) => savedTeamName === team.name)}
+                        disabled={savedTeamNames?.some((savedTeamName) => savedTeamName === searchedTeams.name)}
                         className='btn-block btn-info'
-                        onClick={() => handleSaveTeam(team.name)}>
-                        {savedTeamNames?.some((savedTeamName) => savedTeamName === team.name)
+                        onClick={() => handleSaveTeam(searchedTeams.name)}>
+                        {savedTeamNames?.some((savedTeamName) => savedTeamName === searchedTeams.name)
                           ? 'This team has already been saved!'
                           : 'Save this team!'}
                       </Button>
@@ -150,8 +156,8 @@ const SearchSport = () => {
                   </Card.Body>
                 </Card>
               </Col>
-            );
-          })}
+            {/* );
+          })} */}
         </Row>
       </Container>
     </>
