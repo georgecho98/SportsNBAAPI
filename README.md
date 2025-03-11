@@ -4,8 +4,9 @@
 ## Description
     Sports API Search Engine with JWT token is secure and fast. Data is saved at MongoDB. Login to input, to do list, or modify the status. Thanks for viewing. 
     
-    deployment: 
-    Repository: https://github.com/georgecho98/SportsAPI
+    deployment:  https://sportsnba.onrender.com
+    Repository: https://github.com/georgecho98/SportsNBAAPI
+
 
     
 ## Table of Contents
@@ -53,6 +54,6 @@
     
     Github repository:
 
-    https://github.com/georgecho98/SportsAPI
+    https://github.com/georgecho98/SportsNBAAPI
 
     

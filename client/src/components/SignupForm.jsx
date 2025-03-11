@@ -39,6 +39,11 @@ const SignupForm = ({handleModalClose}) => {
 
       const { token } = await response.json();
       Auth.login(token);
+
+
+      if (handleModalClose) {
+        handleModalClose(); // Call the function passed as prop to close the modal
+      }
     } catch (err) {
       console.error(err);
       setShowAlert(true);

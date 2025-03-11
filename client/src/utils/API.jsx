@@ -85,8 +85,7 @@ export const deleteTeam = (name, token) => {
   });
 };
 
-// make a search to google books api
 
-export const searchSport = (query) => {
-  return fetch(`https://api.balldontlie.io/v1/teams${query}`);
-};
+// export const searchSport = (query) => {
+//   return fetch(`https://api.balldontlie.io/v1/teams${query}`);
+// };
