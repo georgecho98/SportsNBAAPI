@@ -14,7 +14,7 @@ export const saveTeamNames= (teamNameArr) => {
   }
 };
 
-export const removeTeamName = (full_name) => {
+export const removeTeamName = (name) => {
   const savedTeamNames = localStorage.getItem('saved_books')
     ? JSON.parse(localStorage.getItem('saved_books'))
     : null;
@@ -23,7 +23,7 @@ export const removeTeamName = (full_name) => {
     return false;
   }
 
-  const updatedSavedTeamNames = savedTeamNames?.filter((savedTeamName) => savedTeamName !== full_name);
+  const updatedSavedTeamNames = savedTeamNames?.filter((savedTeamName) => savedTeamName !== name);
   localStorage.setItem('saved_books', JSON.stringify(updatedSavedTeamNames));
 
   return true;

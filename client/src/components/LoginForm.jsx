@@ -5,7 +5,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
-import User from '../models/Team';
+import User from '../models/User.jsx';
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const LoginForm = ({ handleModalClose}) => {

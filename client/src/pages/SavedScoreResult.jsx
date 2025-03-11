@@ -4,7 +4,7 @@ import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { getMe, deleteTeam } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeTeamName } from '../utils/localStorage';
-import {User} from '../models/Team';
+import User from '../models/User.jsx';
 
 const SavedScoreResult = () => {
   const [userData, setUserData] = useState(new User (
@@ -39,7 +39,7 @@ const SavedScoreResult = () => {
   }, [userDataLength]);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteTeam = async (full_name) => {
+  const handleDeleteTeam = async (name) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -47,7 +47,7 @@ const SavedScoreResult = () => {
     }
 
     try {
-      const response = await deleteTeam(full_name);
+      const response = await deleteTeam(name);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -56,7 +56,7 @@ const SavedScoreResult = () => {
       const updatedUser = await response.json();
       setUserData(updatedUser);
       // upon success, remove team name from localStorage
-      removeTeamName(full_name);
+      removeTeamName(name);
     } catch (err) {
       console.error(err);
     }
@@ -90,7 +90,7 @@ const SavedScoreResult = () => {
           {userData.savedTeams.map((team) => {
             return (
               <Col md='4'>
-                <Card key={team.full_name} border='dark'>
+                <Card key={team.name} border='dark'>
                   {book.image ? (
                     <Card.Img
                       src={team.image}
@@ -99,7 +99,7 @@ const SavedScoreResult = () => {
                     />
                   ) : null}
                   <Card.Body>
-                        <Card.Title>{team.full_name}</Card.Title>
+                        <Card.Title>{team.name}</Card.Title>
                         <p className='small'>conference: {team.conference}</p>
                         <p className='small'>city {team.city}</p>
                         <p className='small'>division: {team.division}</p>
@@ -107,7 +107,7 @@ const SavedScoreResult = () => {
                     
                     <Button
                       className='btn-block btn-danger'
-                      onClick={() => handleDeleteTeam(team.full_name)}
+                      onClick={() => handleDeleteTeam(team.name)}
                     >
                       Delete this Team!
                     </Button>

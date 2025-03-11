@@ -23,6 +23,7 @@ import { Outlet } from 'react-router-dom';
 //   link: authLink.concat(httpLink),
 //   cache: new InMemoryCache(),
 // });
+import AppNavbar from './components/Navbar'
 
 function App() {
   return (

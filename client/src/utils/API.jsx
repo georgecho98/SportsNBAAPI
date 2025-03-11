@@ -33,7 +33,7 @@ export const loginUser = (userData) => {
 
 
 // @ts-ignore
-export const searchTeam = async (query, token) => {
+export const searchTeam = async (query) => {
 try{
   // @ts-ignore
   const api = new BalldontlieAPI( { apiKey: `${import.meta.env.VITE_YOUR_API_KEY}`  })
@@ -59,9 +59,9 @@ catch(err)
 
 };
 
-export const saveTeam = async(query, token) => {
+export const saveTeam = async(name, token) => {
 
-  return fetch(`/api/sport/Team/${query}`, {
+  return fetch(`/api/sport/Team/${name}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -73,8 +73,8 @@ export const saveTeam = async(query, token) => {
 
 
 // remove saved book data for a logged in user
-export const deleteTeam = (full_name, token) => {
-  return fetch(`/api/sport/Team/${full_name}`, {
+export const deleteTeam = (name, token) => {
+  return fetch(`/api/sport/Team/${name}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`

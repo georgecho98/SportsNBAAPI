@@ -16,7 +16,7 @@ import { saveTeamNames, getSavedTeamNames } from '../utils/localStorage';
 
 const SearchSport = () => {
 
-  const [searchedTeams, setSearchedTeams] = useState('');
+  const [searchedTeams, setSearchedTeams] = useState([]);
 
   const [searchInput, setSearchInput] = useState('');
 
@@ -64,9 +64,9 @@ const SearchSport = () => {
   };
 
   // create function to handle saving a team to our database
-  const handleSaveTeam = async (full_name) => {
+  const handleSaveTeam = async (name) => {
     
-    const teamToSave = searchedTeams.find(() => team.full_name === full_name);
+    const teamToSave = searchedTeams.find(() => team.name === name);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -83,7 +83,7 @@ const SearchSport = () => {
       }
 
       // if book successfully saves to user's account, save book id to state
-      setSavedTeamNames([...savedTeamNames, teamToSave.full_name]);
+      setSavedTeamNames([...savedTeamNames, teamToSave.name]);
     } catch (err) {
       console.error(err);
     }
@@ -125,13 +125,13 @@ const SearchSport = () => {
         <Row>
           {searchedTeams.map((team) => {
             return (
-              <Col md="4" key={team.full_name}>
+              <Col md="4" key={team.name}>
                 <Card border='dark'>
                   {team ? (
                     <Card.Img src={"..\..\Image\x01.jpg"} alt={`Not available`} variant='top' />
                   ) : null}
                   <Card.Body>
-                    <Card.Title>{team.full_name}</Card.Title>
+                    <Card.Title>{team.name}</Card.Title>
                     <p className='small'>conference: {team.conference}</p>
                     <p className='small'>city {team.city}</p>
                     <p className='small'>division: {team.division}</p>
@@ -139,10 +139,10 @@ const SearchSport = () => {
 
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedTeamNames?.some((savedTeamName) => savedTeamName === team.full_name)}
+                        disabled={savedTeamNames?.some((savedTeamName) => savedTeamName === team.name)}
                         className='btn-block btn-info'
-                        onClick={() => handleSaveTeam(team.full_name)}>
-                        {savedTeamNames?.some((savedTeamName) => savedTeamName === team.full_name)
+                        onClick={() => handleSaveTeam(team.name)}>
+                        {savedTeamNames?.some((savedTeamName) => savedTeamName === team.name)
                           ? 'This team has already been saved!'
                           : 'Save this team!'}
                       </Button>
