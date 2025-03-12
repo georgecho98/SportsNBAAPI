@@ -1,23 +1,35 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 // import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
-import User from '../models/User.jsx';
+// import User from '../models/User.jsx';
+
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const SignupForm = ({handleModalClose}) => {
-  // set initial form state
-  const [userFormData, setUserFormData] = useState(new User('','', '', []));
-  // set state for form validation
+  
+  const [userFormData, setUserFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    savedTeams: [],
+  
+  });
+ 
   const [validated] = useState(false);
-  // set state for alert
+
   const [showAlert, setShowAlert] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    setUserFormData(
+      
+      (prev) => ({ ...prev, [name]: value }))
+      // { ...userFormData, [name]: value });
+
+    
   };
 
   const handleFormSubmit = async (event) => {
@@ -25,14 +37,15 @@ const SignupForm = ({handleModalClose}) => {
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
+
     if (form.checkValidity() === false) {
-      event.preventDefault();
+      // event.preventDefault();
       event.stopPropagation();
     }
 
     try {
       const response = await createUser(userFormData);
-
+      console.log(response)
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
@@ -44,17 +57,19 @@ const SignupForm = ({handleModalClose}) => {
       if (handleModalClose) {
         handleModalClose(); // Call the function passed as prop to close the modal
       }
+
+      setUserFormData({
+        username: '',
+        email: '',
+        password: '',
+        savedTeams: [],
+      });
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
+   
 
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-      savedTeams: [],
-    });
   };
 
   return (

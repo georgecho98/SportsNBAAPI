@@ -18,8 +18,8 @@ router.route('/me').get(authenticateToken, getSingleUser);
 
 
 router.route('/login').post(login);
-// put authMiddleware anywhere we need to send a token for verification of user
-router.route('/Team/:full_name').put(saveTeam, authenticateToken);
+
+router.route('/Team').put(saveTeam, authenticateToken);
 router.route('/').post(createUser)
 
 

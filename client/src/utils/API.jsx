@@ -62,9 +62,9 @@ catch(err)
 
 };
 
-export const saveTeam = async(name, token) => {
+export const saveTeam = async(query, token) => {
 
-  return fetch(`/api/sport/Team/${name}`, {
+  return fetch(`/api/sport/Team/${query.name}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -76,8 +76,8 @@ export const saveTeam = async(name, token) => {
 
 
 // remove saved book data for a logged in user
-export const deleteTeam = (name, token) => {
-  return fetch(`/api/sport/Team/${name}`, {
+export const deleteTeam = (query, token) => {
+  return fetch(`/api/sport/Team/${query}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`

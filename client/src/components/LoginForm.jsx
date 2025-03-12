@@ -5,17 +5,23 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
-import User from '../models/User.jsx';
+
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const LoginForm = ({ handleModalClose}) => {
-  const [userFormData, setUserFormData] = useState(new User('','', '', []));
+  const [userFormData, setUserFormData] = useState({
+      username: '',
+      email: '',
+      password: '',
+      savedTeams: [],
+    
+    });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    setUserFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFormSubmit = async (event) => {
@@ -37,6 +43,11 @@ const LoginForm = ({ handleModalClose}) => {
 
       const { token } = await response.json();
       Auth.login(token);
+
+      
+      if (handleModalClose) {
+        handleModalClose(); // Call the function passed as prop to close the modal
+      }
     } catch (err) {
       console.error(err);
       setShowAlert(true);

@@ -1,19 +1,11 @@
-import { Schema, model, Document } from 'mongoose';
-import bcrypt from 'bcrypt';
+import { Schema, model } from 'mongoose';
 
 
 
-// Define an interface for the User document
-class IUser  {
-    constructor(username, email, password){
-    this.username= username;
-    this.email=email;
-    this.password= password;
-    }
-  }
-  
+
+ 
 // Define the schema for the User document
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema(
     {
       username: {
         type: String,
@@ -41,19 +33,11 @@ const userSchema = new Schema<IUser>(
     }
   );
   
-  userSchema.pre<IUser>('save', async function (next) {
-    if (this.isNew || this.isModified('password')) {
-      const saltRounds = 10;
-      this.password =  bcrypt.hash(this.password, saltRounds); 
-    }
-  
-    next();
-  });
-  
-  userSchema.methods.isCorrectPassword = async function (password){
-    return bcrypt.compare(password, this.password);
+
+  userSchema.methods.isCorrectPassword = function (password){
+    return this.password===password;
   };
   
-  const User = model<IUser>('User', userSchema);
+  const User = model('User', userSchema);
   
   export default User;

@@ -1,11 +1,9 @@
 
-// import user model
 import User from '../models/User.js';
-// import sign token function from auth
+
 import { signToken } from '../services/auth.js';
 
-// get a single user by either their id or their username
-export const getSingleUser = async (req, res => {
+export const getSingleUser = async (req, res) => {
   const foundUser = await User.findOne({
     $or: [{ _id: req.user ? req.user._id : req.params.id }, { username: req.params.username }],
   });
@@ -17,7 +15,6 @@ export const getSingleUser = async (req, res => {
   return res.json(foundUser);
 };
 
-// create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
 export const createUser = async (req, res) => {
   const user = await User.create(req.body);
 
@@ -28,8 +25,6 @@ export const createUser = async (req, res) => {
   return res.json({ token, user });
 };
 
-// // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
-// {body} is destructured req.body
 export const login = async (req, res) => {
   const user = await User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] });
   if (!user) {
@@ -49,7 +44,7 @@ export const login = async (req, res) => {
 export const saveTeam = async (req, res) => {
   try {
     const updatedUser = await User.findOneAndUpdate(
-      { full_name: req.user.full_name },
+      { _id: req.user._id },
       { $addToSet: { savedTeams: req.body } },
       { new: true, runValidators: true }
     );
@@ -63,8 +58,8 @@ export const saveTeam = async (req, res) => {
 
 export const deleteTeam = async (req, res) => {
   const updatedUser = await User.findOneAndUpdate(
-    { full_name: req.user.full_name },
-    { $pull: { savedTeams: { full_name: req.params.full_name } } },
+    { _id: req.user._id },
+    { $pull: { savedTeams: { name: req.params.name } } },
     { new: true }
   );
   if (!updatedUser) {

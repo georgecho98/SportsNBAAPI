@@ -59,7 +59,7 @@ const SearchSport = () => {
       //   abbreviation: team.abbreviation || '',
 
       // }));
-      // console.log('Response JSON:', teamData);
+    
       setSearchedTeams(response);
       setSearchInput('');
     } catch (err) {
@@ -70,8 +70,8 @@ const SearchSport = () => {
   // create function to handle saving a team to our database
   const handleSaveTeam = async (name) => {
     
-    const teamToSave = searchedTeams.find(() => team.name === name);
-
+    const teamToSave = searchedTeams
+    // const teamToSave = searchedTeams.find(() => team.name === name);
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -82,7 +82,7 @@ const SearchSport = () => {
     try {
       const response = await saveTeam(teamToSave, token);
 
-      if (!response.ok) {
+      if (!response || (response.ok !== undefined && !response.ok)) {
         throw new Error('something went wrong!');
       }
 
