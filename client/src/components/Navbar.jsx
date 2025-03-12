@@ -12,9 +12,9 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
-        <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
+      <Navbar bg='blue' variant='blue' expand='lg'>
+        <Container fluid >
+          <Navbar.Brand as={Link} to='/' >
             NBA API SEARCH
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />

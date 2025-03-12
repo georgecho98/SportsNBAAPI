@@ -95,9 +95,9 @@ const SearchSport = () => {
 
   return (
     <>
-      <div className="text-light bg-dark p-5">
+      <div className="text-light bg-blue p-5">
         <Container>
-          <h1>Search for Teams!</h1>
+          <h1>Search for Your NBA!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
@@ -111,7 +111,7 @@ const SearchSport = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+                <Button type='submit' variant='success' size='small'>
                   Submit Search
                 </Button>
               </Col>
