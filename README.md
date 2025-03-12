@@ -2,11 +2,13 @@
 
 
 ## Description
-    Sports API Search Engine with JWT token is secure and fast. Data is saved at MongoDB. Login to input, to do list, or modify the status. Thanks for viewing. 
+    NBA API Search Engine with JWT token is secure and fast. Data is saved at MongoDB. Login to input, to do list, or modify the status. Thanks for viewing. 
     
-    deployment:  https://sportsnba.onrender.com
-    Repository: https://github.com/georgecho98/SportsNBAAPI
+    Deployment:  https://sportsnba.onrender.com
 
+    Repository: https://github.com/georgecho98/SportsNBAAPI
+    
+    presentation: https://docs.google.com/presentation/d/1cSEcA4kD1PnKmNpTXqkPoUu1VkN89Gifan_jVJv7xdA/edit?usp=sharing
 
     
 ## Table of Contents
@@ -19,18 +21,19 @@
 ## Installation 
     
     Download the repostary. Then follow the following step: 
-    NODE_ENV=production npm i,
-    NODE_ENV=production npm run build, 
-    NODE_ENV=production npm run start
+    npm install
+    npm run render-build
+    npm run start
 
-    Place your .env file in the server folder. and input your postgres url and JWT token in there.
-    For the development version: npm run dev
+    Place your .env file in the server folder. and input your mongoose URI, JWT token and sport API key in there.
+
+    For the development version: npm run develop
 
 ## License
     no license
 
 ## Credit
-    Apolloserver, , react, typscript, API, JWT, 
+    React, Javascript, API, JWT, express server 
 
 ## Usage
    Frontpagr
