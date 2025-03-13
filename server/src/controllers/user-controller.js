@@ -51,7 +51,7 @@ export const saveTeam = async (req, res) => {
       { $addToSet: { savedTeams: req.body } },
       { new: true, runValidators: true }
     );
-    console.log('backend',req.body)
+    console.log('backend updated',updatedUser)
     return res.json(updatedUser);
   } catch (err) {
     console.log(err);
