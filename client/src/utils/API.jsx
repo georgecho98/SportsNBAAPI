@@ -63,8 +63,8 @@ catch(err)
 };
 
 export const saveTeam = async(query, token) => {
-
-  return fetch(`/api/sport/Team/${query.name}`, {
+try{
+  const response = await fetch(`/api/sport/Team`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -72,6 +72,22 @@ export const saveTeam = async(query, token) => {
     },
     body: JSON.stringify(query),
   });
+  // console.log(`${query.name}`)
+  console.log(query)
+  // console.log('Saving team to:', `/api/sport/Team/${query.name}`);
+  console.log('API response',response)
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`API Error: ${errorData.message || 'Failed to save team'}`);
+  }
+  const data = await response.json(); 
+  console.log('data in json',data)
+  return data;
+} catch (err) {
+  console.error('Save team error:', err);
+  throw err; // Ensure calling function gets the error
+}
+
 };
 
 
@@ -86,6 +102,3 @@ export const deleteTeam = (query, token) => {
 };
 
 
-// export const searchSport = (query) => {
-//   return fetch(`https://api.balldontlie.io/v1/teams${query}`);
-// };

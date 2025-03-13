@@ -3,6 +3,6 @@ export default class User {
     this.username = username || null;
     this.email = email || null;
     this.password = password || null;
-    this.savedTeams = savedTeams || [];
+    this.savedTeams = Teams|| [];
   }
 }

@@ -1,3 +1,3 @@
 import Team from './Team.js';
-
-export default { Team };
+import User from './User.js';
+export default { Team, User };

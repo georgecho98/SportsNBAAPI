@@ -1,5 +1,6 @@
 
 import User from '../models/User.js';
+import Team from '../models/Team.js';
 
 import { signToken } from '../services/auth.js';
 
@@ -43,11 +44,14 @@ export const login = async (req, res) => {
 
 export const saveTeam = async (req, res) => {
   try {
+
+    console.log('backend',req.body)
     const updatedUser = await User.findOneAndUpdate(
       { _id: req.user._id },
       { $addToSet: { savedTeams: req.body } },
       { new: true, runValidators: true }
     );
+    console.log('backend',req.body)
     return res.json(updatedUser);
   } catch (err) {
     console.log(err);

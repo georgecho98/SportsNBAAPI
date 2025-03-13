@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-
+import Team from './Team.js'
 
 
  
@@ -25,6 +25,10 @@ const userSchema = new Schema(
         minlength: 5,
       }
       ,
+      savedTeams:[{
+        type: Map,
+        ref: 'Team', // Correct way to reference the Team model
+      }]
     },
     {
       timestamps: true,

@@ -8,7 +8,7 @@ const teamSchema = new Schema({
     type: String,
     required: true,
   },
-  // saved book id from GoogleBooks
+  
   division: {
     type: String,
     required: true,
@@ -28,6 +28,6 @@ const teamSchema = new Schema({
 });
 
 
-const Team = model('teamSchema',teamSchema);
+const Team = model('Team',teamSchema);
 
 export default Team;

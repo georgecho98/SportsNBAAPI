@@ -57,7 +57,7 @@ const LoginForm = ({ handleModalClose}) => {
       username: '',
       email: '',
       password: '',
-      savedBooks: [],
+      savedTeams: [],
     });
   };
 

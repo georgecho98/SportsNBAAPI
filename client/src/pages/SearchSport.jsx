@@ -13,7 +13,6 @@ import Auth from '../utils/auth';
 import { saveTeam,searchTeam } from '../utils/API';
 import { saveTeamNames, getSavedTeamNames } from '../utils/localStorage';
 
-
 const SearchSport = () => {
 
   const [searchedTeams, setSearchedTeams] = useState('');
@@ -68,25 +67,29 @@ const SearchSport = () => {
   };
 
   // create function to handle saving a team to our database
-  const handleSaveTeam = async (name) => {
+  const handleSaveTeam = async (_name) => {
     
     const teamToSave = searchedTeams
-    // const teamToSave = searchedTeams.find(() => team.name === name);
-    // get token
+    console.log('teamToSave:', teamToSave)
+    console.log('Type of teamToSave:', typeof teamToSave); 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+    console.log(token)
     if (!token) {
       return false;
     }
 
     try {
+      console.log('Saving team:', teamToSave);
       const response = await saveTeam(teamToSave, token);
+      console.log('response', response )
 
+      // const responsedata = await response.json();
+      // console.log('Responsedata:', responsedata )
       if (!response || (response.ok !== undefined && !response.ok)) {
         throw new Error('something went wrong!');
       }
 
-      // if book successfully saves to user's account, save book id to state
+      
       setSavedTeamNames([...savedTeamNames, teamToSave.name]);
     } catch (err) {
       console.error(err);
@@ -122,8 +125,7 @@ const SearchSport = () => {
 
       <Container>
         <h2 className='pt-5'>
-          {searchedTeams.length
-            ? `Viewing ${searchedTeams.length} results:`
+          {searchedTeams? `Viewing ${searchedTeams.full_name} results:`
             : 'Search for a team to begin'}
         </h2>
         <Row>

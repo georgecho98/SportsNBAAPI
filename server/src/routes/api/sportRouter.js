@@ -19,10 +19,10 @@ router.route('/me').get(authenticateToken, getSingleUser);
 
 router.route('/login').post(login);
 
-router.route('/Team').put(saveTeam, authenticateToken);
+router.route('/Team').put(authenticateToken,saveTeam );
 router.route('/').post(createUser)
 
 
-router.route('/Team/:full_name').delete(deleteTeam, authenticateToken);
+router.route('/Team/:name').delete(authenticateToken, deleteTeam);
 
 export default router;

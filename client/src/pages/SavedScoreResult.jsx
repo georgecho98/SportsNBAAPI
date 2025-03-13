@@ -4,11 +4,16 @@ import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { getMe, deleteTeam } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeTeamName } from '../utils/localStorage';
-import User from '../models/User.jsx';
+
 
 const SavedScoreResult = () => {
-  const [userData, setUserData] = useState(new User (
-    '','','',[]));
+  const [userData, setUserData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    savedTeams: [],
+  
+  });
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
@@ -38,7 +43,6 @@ const SavedScoreResult = () => {
     getUserData();
   }, [userDataLength]);
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteTeam = async (name) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -72,7 +76,7 @@ const SavedScoreResult = () => {
       <div className='text-light bg-dark p-5'>
         <Container>
           {userData.username ? (
-            <h1>Viewing {userData.username}'s saved books!</h1>
+            <h1>Viewing {userData.username}'s saved teams!</h1>
           ) : (
             <h1>Viewing saved Tems!</h1>
           )}
@@ -84,20 +88,14 @@ const SavedScoreResult = () => {
             ? `Viewing ${userData.savedTeams.length} saved ${
                 userData.savedTeams.length === 1 ? 'team' : 'teams'
               }:`
-            : 'You have no saved books!'}
+            : 'You have no saved teams!'}
         </h2>
         <Row>
           {userData.savedTeams.map((team) => {
             return (
               <Col md='4'>
                 <Card key={team.name} border='dark'>
-                  {book.image ? (
-                    <Card.Img
-                      src={team.image}
-                      alt={`The cover for ${team.title}`}
-                      variant='top'
-                    />
-                  ) : null}
+                  
                   <Card.Body>
                         <Card.Title>{team.full_name}</Card.Title>
                         <p className='small'>conference: {team.conference}</p>
